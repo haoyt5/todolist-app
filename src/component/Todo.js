@@ -11,7 +11,7 @@ export default (props) => (
             {props.todo.text}
         </div>
         <a onClick={props.onDelete}
-                className="col waves-effect  btn-flat  btn-large white "> <i class="material-icons cyan-text text-accent-5">delete</i></a>
+                className="col waves-effect  btn-flat  btn-large white "> <i class="material-icons cyan-text text-darken-4">clear</i></a>
     </div>
 
 )

@@ -61,12 +61,12 @@ export default class TodoList extends React.Component {
             <div className="container">          
             <TodoForm onSubmit={this.addTodo.bind(this)}/>
             <div className="teal-text row">
-                <div className="col s9 flow-text">
+                <div className="col s8 flow-text light-blue-text text-darken-2">
                 To Dos Left： {this.state.todos.filter(todo => !todo.complete).length} 
                 </div>
                 {this.state.todos.some(todo=>todo.complete) ? (
-                    <div className="col s3 center">
-                    <a onClick={this.removeAllTodosThatAreComplete.bind(this)} className="btn-floating btn-large waves-effect waves-light "><i class="material-icons">delete_sweep</i></a>
+                    <div className="col s4 center">
+                    <a onClick={this.removeAllTodosThatAreComplete.bind(this)} className="waves-effect  btn-flat  btn-small  ">complete<i class="material-icons right cyan-text text-darken-4">clear_all</i></a>
                     </div>
                 ):null}
                 
@@ -75,13 +75,13 @@ export default class TodoList extends React.Component {
             </div>
             <div className="row">
                 <div className="col s3 center">
-                <button onClick={()=>this.updateTodoToShow('all')} className="teal accent-4 lighten-2  waves-effect waves-light btn-small ">ALL</button>
+                <button onClick={()=>this.updateTodoToShow('all')} className="grey lighten-5 cyan-text text-accent-3   waves-effect waves-light btn-flat ">ALL</button>
                 </div>
                 <div className="col s3 center">
-                <button onClick={()=>this.updateTodoToShow('active')} className="teal accent-4 lighten-2 waves-effect waves-light btn-small">ACTIVE</button>
+                <button onClick={()=>this.updateTodoToShow('active')} className="grey lighten-5 cyan-text text-accent-4 waves-effect waves-light btn-flat">ACTIVE</button>
                 </div>
                 <div className="col s3 center">
-                <button onClick={()=>this.updateTodoToShow('complete')} className="teal accent-4 waves-effect waves-light btn-small">COMPLETE</button>
+                <button onClick={()=>this.updateTodoToShow('complete')} className="grey lighten-5 cyan-text text-darken-2 waves-effect waves-light btn-flat">COMPLETE</button>
                 </div>
                 <div className="col s3">
                     <button onClick={()=>this.setState({
@@ -91,7 +91,7 @@ export default class TodoList extends React.Component {
                                 })),
                         toggleAllComplete: !this.state.toggleAllComplete
                     })}
-                            className="teal accent-4 lighten-2  waves-effect waves-light btn-small">All DONE: {`${this.state.toggleAllComplete}`}</button>
+                            className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">All DONE: {`${this.state.toggleAllComplete}`}</button>
                     </div>
             </div>
 
