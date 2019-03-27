@@ -62,7 +62,7 @@ export default class TodoList extends React.Component {
             <TodoForm onSubmit={this.addTodo.bind(this)}/>
             <div className="teal-text row">
                 <div className="col s8 flow-text light-blue-text text-darken-2">
-                To Dos Left： {this.state.todos.filter(todo => !todo.complete).length} 
+                 {this.state.todos.filter(todo => !todo.complete).length} pendind tasks
                 </div>
                 {this.state.todos.some(todo=>todo.complete) ? (
                     <div className="col s4 center">
@@ -91,7 +91,7 @@ export default class TodoList extends React.Component {
                                 })),
                         toggleAllComplete: !this.state.toggleAllComplete
                     })}
-                            className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">All DONE: {`${this.state.toggleAllComplete}`}</button>
+                            className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">Complete all : {`${this.state.toggleAllComplete}`}</button>
                     </div>
             </div>
             
