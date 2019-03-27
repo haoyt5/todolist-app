@@ -62,7 +62,7 @@ export default class TodoList extends React.Component {
             <TodoForm onSubmit={this.addTodo.bind(this)}/>
             <div className="teal-text row">
                 <div className="col s8 flow-text light-blue-text text-darken-2">
-                 {this.state.todos.filter(todo => !todo.complete).length} pendind tasks
+                 {this.state.todos.filter(todo => !todo.complete).length} pending tasks
                 </div>
                 {this.state.todos.some(todo=>todo.complete) ? (
                     <div className="col s4 center">
