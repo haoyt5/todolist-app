@@ -6,12 +6,12 @@ export default (props) => (
                 textDecoration: props.todo.complete ? "line-through" : ""
                 
             }}
-            className="u-pointer pink-text col s11"
+            className="u-pointer  col s11 flow-text cyan-text text-accent-4"
             onClick={props.toggleComplete}>
             {props.todo.text}
         </div>
-        <button onClick={props.onDelete}
-                className="col btn-small cyan darken-4 ">Ｘ</button>
+        <a onClick={props.onDelete}
+                className="col waves-effect  btn-flat  btn-large white "> <i class="material-icons cyan-text text-accent-5">delete</i></a>
     </div>
 
 )

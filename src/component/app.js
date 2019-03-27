@@ -50,7 +50,7 @@ class App extends React.Component{
     render() {
         return(
            <div className="to-do-app container">
-            <h1 className="center pink-text">待辦事項</h1>
+            <h1 className="center  blue-text  text-lighten-2">TO DO LIST</h1>
             <TodoList/>
            </div>
 
