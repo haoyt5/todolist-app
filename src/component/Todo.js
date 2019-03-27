@@ -1,6 +1,6 @@
 import React from 'react';
 export default (props) => (
-    <div className="row">
+    <div className="row collection-item valign-wrapper">
         <div 
             style={{
                 textDecoration: props.todo.complete ? "line-through" : ""

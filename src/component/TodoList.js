@@ -94,8 +94,9 @@ export default class TodoList extends React.Component {
                             className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">All DONE: {`${this.state.toggleAllComplete}`}</button>
                     </div>
             </div>
-
+            
             {/* {JSON.stringify(this.state.todos)} */}
+            <div className="collection">
             {todos.map(todo =>(
                 
                 <Todo key={todo.id} 
@@ -103,6 +104,8 @@ export default class TodoList extends React.Component {
                       onDelete={()=>this.handleDeleteTodo(todo.id)}
                       toggleComplete={()=>this.toggleComplete(todo.id)} />
             ))}
+            </div>
+
             </div>
             
         ); 
