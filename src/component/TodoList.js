@@ -91,7 +91,7 @@ export default class TodoList extends React.Component {
                                 })),
                         toggleAllComplete: !this.state.toggleAllComplete
                     })}
-                            className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">Complete all : {`${this.state.toggleAllComplete}`}</button>
+                            className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">all done: {`${this.state.toggleAllComplete}`}</button>
                     </div>
             </div>
             
