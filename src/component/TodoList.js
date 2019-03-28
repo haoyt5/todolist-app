@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './TodoForm';
-import Todo from './Todo'
+import Todo from './Todo';
+import { Route,NavLink} from 'react-router-dom';
 
 export default class TodoList extends React.Component {
     constructor(props){
@@ -8,72 +9,79 @@ export default class TodoList extends React.Component {
         this.state = {
             todos:[],
             todoToShow: "all",
-            toggleAllComplete: true
+            toggleAllComplete: true,
+            filterTodos: []
         }
 
     }
-    addTodo (todo){
-        this.setState({
-            todos:[todo,...this.state.todos]
-        });
-        console.log(this.state)
-    }
-    toggleComplete(id){
-        this.setState({
-            todos: this.state.todos.map(todo =>{
-                if(todo.id === id){
-                    return{
-                        ...todo,
-                        complete: !todo.complete
-                    }
-                }else{
-                    return todo
-                }
-            })
-        })
-
-    }
+    // addTodo (todo){
+    //     this.setState({
+    //         todos:[...this.state.todos,todo]
+    //     });
+    //     // this.switchStatus(this.props.status);
+    // }
+    // toggleComplete(id){
+    //     this.setState({
+    //         todos: this.state.todos.map(todo =>{
+    //             if(todo.id === id){
+    //                 return{
+    //                     ...todo,
+    //                     complete: !todo.complete
+    //                 }
+    //             }else{
+    //                 return todo
+    //             }
+    //         })
+    //     })
+    // }
     updateTodoToShow (string){
         this.setState({
             todoToShow: string
         })
     }
-    handleDeleteTodo(id){
-        this.setState({
-            todos: this.state.todos.filter(todo => todo.id !=id )
-        })
-    }
+    // handleDeleteTodo(id){
+    //     this.setState({
+    //         todos: this.state.todos.filter(todo => todo.id !=id )
+    //     })
+    // }
     removeAllTodosThatAreComplete(id){
         this.setState({
             todos: this.state.todos.filter(todo => !todo.complete )
         })
     }
-    render() {
+    switchStatus (status) {
         let todos =[];
-        if (this.state.todoToShow === 'all'){
-            todos = this.state.todos
-        } else if(this.state.todoToShow === 'active'){
-            todos = this.state.todos.filter(todo => !todo.complete);
-        } else if(this.state.todoToShow === 'complete'){
-            todos = this.state.todos.filter(todo => todo.complete);
-        }
+        if (status === 'all'){
+            todos = this.props.todos
+        } else if(status === 'active'){
+            todos = this.props.todos.filter(todo => !todo.complete);
+        } else if(status === 'complete'){
+            todos = this.props.todos.filter(todo => todo.complete);
+        } 
+        this.setState({filterTodos:todos})    
+    }
+    componentDidMount() {
+        this.switchStatus(this.props.status);
+     }
+    render() {
+        const todos = this.state.filterTodos;
+        const { addTodo,handleDeleteTodo,toggleComplete } = this.props
+
         return(
             <div className="container">          
-            <TodoForm onSubmit={this.addTodo.bind(this)}/>
+            <TodoForm addTodo={addTodo}/>
             <div className="teal-text row">
                 <div className="col s8 flow-text light-blue-text text-darken-2">
-                 {this.state.todos.filter(todo => !todo.complete).length} pending tasks
+                 {todos.filter(todo => !todo.complete).length} pending tasks
                 </div>
-                {this.state.todos.some(todo=>todo.complete) ? (
+                {/* {todos.some(todo=>todo.complete) ? (
                     <div className="col s4 center">
-                    <a onClick={this.removeAllTodosThatAreComplete.bind(this)} className="waves-effect  btn-flat  btn-small  ">complete<i class="material-icons right cyan-text text-darken-4">clear_all</i></a>
+                    <a onClick={this.removeAllTodosThatAreComplete.bind(this)} className="waves-effect  btn-flat  btn-small  ">complete<i className="material-icons right cyan-text text-darken-4">clear_all</i></a>
                     </div>
-                ):null}
-                
-                
+                ):null} */}
                 
             </div>
-            <div className="row">
+            {/* <div className="row">
                 <div className="col s3 center">
                 <button onClick={()=>this.updateTodoToShow('all')} className="grey lighten-5 cyan-text text-accent-3   waves-effect waves-light btn-flat ">ALL</button>
                 </div>
@@ -85,7 +93,7 @@ export default class TodoList extends React.Component {
                 </div>
                 <div className="col s3">
                     <button onClick={()=>this.setState({
-                        todos: this.state.todos.map(todo =>({
+                        todos: todos.map(todo =>({
                                     ... todo,
                                     complete: this.state.toggleAllComplete
                                 })),
@@ -93,21 +101,39 @@ export default class TodoList extends React.Component {
                     })}
                             className="grey lighten-5 cyan-text text-darken-4 waves-effect waves-light btn-flat">all done: {`${this.state.toggleAllComplete}`}</button>
                     </div>
-            </div>
-            
-            {/* {JSON.stringify(this.state.todos)} */}
-            <div className="collection">
-            {todos.map(todo =>(
+            </div> */}
+            <div className="row grey lighten-5 ">
                 
-                <Todo key={todo.id} 
-                      todo={todo}
-                      onDelete={()=>this.handleDeleteTodo(todo.id)}
-                      toggleComplete={()=>this.toggleComplete(todo.id)} />
-            ))}
+                <NavLink  className="col s4 center" to="/"><div className="grey lighten-5 cyan-text text-darken-2 waves-effect waves-light btn-flat">All</div></NavLink>
+                <NavLink  className="col s4 center"  to="/active"><div className="grey lighten-5 cyan-text text-darken-2 waves-effect waves-light btn-flat">Active</div></NavLink>
+                <NavLink  className="col s4 center"  to="/complete"><div className="grey lighten-5 cyan-text text-darken-2 waves-effect waves-light btn-flat">Complete</div></NavLink>
             </div>
+            {/* START */}
+            <div className="collection">
+                {todos.map(todo =>(
+                    <Todo key={todo.id} 
+                        todo={todo}
+                        onDelete={()=>handleDeleteTodo(todo.id)}
+                        toggleComplete={()=>toggleComplete(todo.id)} />
+                ))}
+            </div>
+            {/* END */}
+
+
 
             </div>
             
         ); 
     }
 }
+// class TodoList extends React.Component{
+
+//     render(){
+//         return(
+//             <div className="container">
+//             <h1>Yeahhh</h1>
+//             </div>
+//         )
+//     }
+
+// }
