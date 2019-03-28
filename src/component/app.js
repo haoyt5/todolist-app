@@ -38,7 +38,7 @@ class App extends React.Component{
 
     render() {
         return(
-        <BrowserRouter  basename='/todolist-app'>
+        <BrowserRouter  basename='/todolist-app/dist'>
             <div className="to-do-app container">
                 <h1 className="center  blue-text  text-lighten-2">TO DO LIST</h1>
                 {/* <TodoList/> */}
